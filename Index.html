@@ -46,7 +46,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.57c-.28 1.13-1.04 1.4-1.74.88L14.25 16l-4.12 3.9c-.78.72-1.4.34-1.68-.65z"></path></svg>
     </a>
 
-    <!-- JavaScript Aplikasi Utama -->
+    <!-- JavaScript Aplikasi -->
     <script>
         const postsData = [
             { id: 1, title: 'Judul Postingan 1', category: 'Kategori 1', imageUrl: 'https://placehold.co/400x400/eeeeee/333333?text=Foto+1', detailImage: 'https://placehold.co/400x600/eeeeee/333333?text=Foto+Detail+1' },
@@ -95,7 +95,29 @@
         
         function getSearchPageHTML() { const { searchQuery } = appState; const results = postsData.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase())); return `<main class="p-4 sm:p-6 flex-grow"><div class="flex items-center justify-between mb-5"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-gray-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><h2 class="text-xl font-bold text-gray-800 dark:text-slate-200">Hasil untuk: "<span class="text-blue-500">${searchQuery}</span>"</h2></div><button onclick="navigate('home')" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div>${results.length > 0 ? `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">${results.map(p => getPostCardHTML(p)).join('')}</div>` : `<div class="text-center py-10 text-gray-500 dark:text-slate-400"><p>Tidak ada postingan yang cocok ditemukan.</p></div>`}<div class="mt-12"><h3 class="text-lg font-semibold text-gray-700 dark:text-slate-300 mb-4">Mungkin Anda suka?</h3><div class="flex flex-wrap gap-3">${suggestedCategories.map(c => `<button onclick="navigate('search', '${c.replace(/'/g, "&apos;")}')" class="px-4 py-2 bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 rounded-full hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500 transition-colors">${c}</button>`).join('')}</div></div></main>`; }
         
-        function getFooterHTML() { return `<footer class="bg-slate-800 dark:bg-black text-slate-400 mt-auto"><div class="max-w-6xl mx-auto py-10 px-4 sm:px-6"><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div><h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">SUPPORT</h3><a href="#" class="block text-lg hover:text-white transition-colors">Saweria</a></div><div><h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">ABOUT</h3><a href="#" class="block text-lg hover:text-white transition-colors">About Us</a></div></div><div class="mt-8 pt-8 border-t border-slate-700 dark:border-slate-600 text-center text-slate-500"><p>&copy; ${new Date().getFullYear()} Sandex. All rights reserved.</p></div></div></footer>`; }
+        function getFooterHTML() { 
+            return `<footer class="bg-slate-800 dark:bg-black text-slate-400 mt-auto">
+                        <div class="max-w-6xl mx-auto py-10 px-4 sm:px-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">SUPPORT</h3>
+                                    <a href="#" class="block text-lg hover:text-white transition-colors">Saweria</a>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">ABOUT</h3>
+                                    <a href="#" class="block text-lg hover:text-white transition-colors">About Us</a>
+                                </div>
+                            </div>
+                            <!-- Link Tes Safelinku Ditambahkan di Sini -->
+                            <div class="mt-4">
+                                <a href="https://www.google.com" target="_blank" class="text-blue-400 hover:underline">Tes Link Eksternal (ke Google)</a>
+                            </div>
+                            <div class="mt-8 pt-8 border-t border-slate-700 dark:border-slate-600 text-center text-slate-500">
+                                <p>&copy; ${new Date().getFullYear()} Sandex. All rights reserved.</p>
+                            </div>
+                        </div>
+                    </footer>`;
+        }
 
         function render() {
             let mainContent = '';
