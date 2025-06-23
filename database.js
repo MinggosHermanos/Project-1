@@ -47,6 +47,16 @@ const postsData = [
             { title: 'Tonton Video 4', url: '#' }
         ]
     },
+    {
+        id: 5, 
+        title: 'Judul Postingan 5', 
+        category: 'Kategori 4', 
+        imageUrl: 'https://placehold.co/400x400/eeeeee/333333?text=Foto+5', 
+        detailImage: 'https://placehold.co/400x600/eeeeee/333333?text=Foto+Detail+5',
+        videoLinks: [
+            { title: 'Tonton Video 5', url: '#' }
+        ]
+    },
 
     // ===================================================================
     // CONTOH MENAMBAH POSTINGAN BARU:
@@ -55,7 +65,7 @@ const postsData = [
     // ===================================================================
     /*
     { 
-        id: 5, // <-- Ganti ID
+        id: 6, // <-- Ganti ID
         title: 'Judul Postingan BARU', // <-- Ganti Judul
         category: 'Teknologi', // <-- Ganti Kategori
         imageUrl: 'URL_GAMBAR_ANDA_DISINI.jpg', // <-- Ganti URL Gambar
