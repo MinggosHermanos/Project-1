@@ -41,13 +41,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.57c-.28 1.13-1.04 1.4-1.74.88L14.25 16l-4.12 3.9c-.78.72-1.4.34-1.68-.65z"></path></svg>
     </a>
 
-    <!-- PENTING: Memuat file database.js SEBELUM script utama -->
+    <!-- Memuat file database.js SEBELUM script utama -->
     <script src="database.js"></script>
 
     <!-- JavaScript Aplikasi Utama -->
     <script>
-        // const postsData = [...] <-- DATA POSTINGAN SUDAH DIHAPUS DARI SINI DAN PINDAH KE database.js
-
         const bannerData = {
             imageUrl: 'https://placehold.co/1200x675/1e293b/ffffff?text=Banner+Iklan+Anda',
             linkUrl: '#'
@@ -66,13 +64,12 @@
         
         const appRoot = document.getElementById('app-root');
 
-        // Fungsi getHeaderHTML, getBannerHTML, getPostCardHTML, getHomePageHTML tetap sama...
         function getHeaderHTML() {
             const { theme, isMenuOpen, isSearchOpen } = appState;
             if (isSearchOpen) {
                 return `<div class="sticky top-0 z-20 flex items-center justify-between p-3 sm:p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-sm border-b border-gray-200 dark:border-slate-800 animate-fade-in"><input id="search-input" type="text" placeholder="Cari dan tekan Enter..." onkeydown="handleSearchKey(event)" class="w-full bg-transparent text-gray-800 dark:text-slate-200 placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none text-lg" autofocus /><button onclick="toggleSearch(false)" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div>`;
             }
-            return `<div class="relative"><header class="sticky top-0 z-20 flex items-center justify-between p-3 sm:p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-sm border-b border-gray-200 dark:border-slate-800"><div class="flex items-center space-x-3"><button onclick="toggleMenu()" class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-500 dark:bg-blue-600 text-white shadow-md hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors">${isMenuOpen ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>`}</button><h1 class="text-2xl font-bold text-gray-800 dark:text-slate-200 tracking-tight">Sandex</h1></div><div class="flex items-center space-x-1 sm:space-x-2"><button onclick="toggleSearch(true)" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></button><button onclick="toggleTheme()" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700">${theme === 'light' ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`}</button></div></header><div class="absolute top-full left-0 right-0 z-10 p-2 transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}"><div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-100 dark:border-slate-700 p-2"><nav class="flex flex-col space-y-1"><a href="#" onclick="navigate('home')" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">Halaman utama</a><a href="#" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">Live local / local acak</a><a href="#" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">Cosplay random</a></nav></div></div></div>`;
+            return `<div class="relative"><header class="sticky top-0 z-20 flex items-center justify-between p-3 sm:p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-sm border-b border-gray-200 dark:border-slate-800"><div class="flex items-center space-x-3"><button onclick="toggleMenu()" class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-500 dark:bg-blue-600 text-white shadow-md hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors">${isMenuOpen ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>`}</button><h1 class="text-2xl font-bold text-gray-800 dark:text-slate-200 tracking-tight">Sandex</h1></div><div class="flex items-center space-x-1 sm:space-x-2"><button onclick="toggleSearch(true)" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></button><button onclick="toggleTheme()" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700">${theme === 'light' ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`}</button></div></header><div class="absolute top-full left-0 right-0 z-10 p-2 transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}"><div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-100 dark:border-slate-700 p-2"><nav class="flex flex-col space-y-1"><a href="#" onclick="navigate('home')" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">Halaman utama</a><a href="#" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">Live local / local acak</a><a href="#" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">Cosplay random</a><a href="#" onclick="navigate('about')" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">About Us</a></nav></div></div></div>`;
         }
         function getBannerHTML() {
             return `<section class="p-4 sm:p-6 animate-fade-in"><a href="${bannerData.linkUrl}" class="block aspect-video rounded-xl overflow-hidden shadow-lg group"><img src="${bannerData.imageUrl}" alt="Banner Iklan" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" /></a></section>`;
@@ -82,46 +79,83 @@
             const { viewMode } = appState;
             return `${getBannerHTML()}<main class="p-4 sm:p-6 flex-grow"><div class="flex items-center justify-between mb-5"><h2 class="text-xl font-bold text-gray-800 dark:text-slate-200">Postingan Terbaru</h2><div class="flex items-center space-x-2 p-1 bg-gray-200 dark:bg-slate-800 rounded-lg"><button onclick="setViewMode('grid')" class="p-2 rounded-md ${viewMode === 'grid' ? 'bg-white dark:bg-slate-700 text-blue-600' : 'text-gray-500'}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg></button><button onclick="setViewMode('list')" class="p-2 rounded-md ${viewMode === 'list' ? 'bg-white dark:bg-slate-700 text-blue-600' : 'text-gray-500'}"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" /></svg></button></div></div><div class="${viewMode === 'grid' ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5' : 'flex flex-col space-y-4'}">${postsData.map(post => getPostCardHTML(post)).join('')}</div></main>`; 
         }
-
-        // PENTING: Fungsi di bawah ini sudah diperbarui untuk menampilkan tautan video secara dinamis
         function getDetailPageHTML() { 
             const post = postsData.find(p => p.id === appState.selectedPostId); 
             if (!post) { return `<main class="p-4 sm:p-6 text-center flex-grow"><h2 class="text-2xl font-bold text-red-500">Error</h2><p class="text-slate-600 dark:text-slate-400 mt-2">Postingan tidak ditemukan.</p><button onclick="navigate('home')" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Kembali ke Beranda</button></main>`; } 
-            
-            return `<main class="p-4 sm:p-6 flex-grow animate-fade-in">
-                <header class="flex items-center mb-4">
-                    <button onclick="navigate('home')" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
-                    <h1 class="text-xl font-bold text-gray-800 dark:text-slate-200 ml-2">${post.title}</h1>
-                </header>
-                <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 p-4 max-w-md mx-auto">
-                    <img src="${post.detailImage}" alt="${post.title}" class="w-full h-auto object-cover rounded-lg mb-6" />
-                    <h2 class="text-lg font-semibold text-center text-gray-700 dark:text-slate-300 mb-4">Tautan Video</h2>
-                    <!-- PENTING: Bagian ini sekarang dinamis, mengambil data dari videoLinks -->
-                    <ul class="space-y-3">
-                        ${post.videoLinks.map(link => `
-                            <li>
-                                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block w-full text-center px-4 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-                                    ${link.title}
-                                </a>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-            </main>`; 
+            return `<main class="p-4 sm:p-6 flex-grow animate-fade-in"><header class="flex items-center mb-4"><button onclick="navigate('home')" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button><h1 class="text-xl font-bold text-gray-800 dark:text-slate-200 ml-2">${post.title}</h1></header><div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 p-4 max-w-md mx-auto"><img src="${post.detailImage}" alt="${post.title}" class="w-full h-auto object-cover rounded-lg mb-6" /><h2 class="text-lg font-semibold text-center text-gray-700 dark:text-slate-300 mb-4">Tautan Video</h2><ul class="space-y-3">${post.videoLinks.map(link => `<li><a href="${link.url}" target="_blank" rel="noopener noreferrer" class="block w-full text-center px-4 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">${link.title}</a></li>`).join('')}</ul></div></main>`; 
         }
         
-        // Sisa fungsi (getSearchPageHTML, getFooterHTML, render, setState, dll) tetap sama
+        // --- PENAMBAHAN BARU ---
+        // Langkah 1: Fungsi untuk konten Halaman About Us
+        function getAboutPageHTML() {
+            return `
+                <main class="p-4 sm:p-6 flex-grow animate-fade-in">
+                    <header class="text-center mb-8">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-slate-200">Tentang Kami</h1>
+                        <p class="mt-2 text-lg text-gray-600 dark:text-slate-400">Mengenal lebih dekat siapa di balik Sandex</p>
+                    </header>
+                    <div class="max-w-3xl mx-auto bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 sm:p-8">
+                        <div class="flex flex-col sm:flex-row items-center sm:space-x-8">
+                            <img src="https://placehold.co/150x150/1e293b/ffffff?text=Logo" alt="Logo Sandex" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-blue-500">
+                            <div class="mt-6 sm:mt-0 text-center sm:text-left">
+                                <h2 class="text-2xl font-semibold text-gray-800 dark:text-slate-200">Sandex Team</h2>
+                                <p class="mt-4 text-gray-700 dark:text-slate-300 leading-relaxed">
+                                    Selamat datang di Sandex! Kami adalah sebuah tim yang bersemangat dalam membagikan konten menarik seputar teknologi, lifestyle, dan berbagai hal random lainnya.
+                                    Proyek ini kami bangun dari nol untuk belajar dan bereksperimen dengan teknologi web modern.
+                                </p>
+                                <p class="mt-4 text-gray-700 dark:text-slate-300 leading-relaxed">
+                                    Terima kasih telah berkunjung dan mendukung kami!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            `;
+        }
+        
         function getSearchPageHTML() { const { searchQuery } = appState; const results = postsData.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase())); return `<main class="p-4 sm:p-6 flex-grow"><div class="flex items-center justify-between mb-5"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-gray-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><h2 class="text-xl font-bold text-gray-800 dark:text-slate-200">Hasil untuk: "<span class="text-blue-500">${searchQuery}</span>"</h2></div><button onclick="navigate('home')" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div>${results.length > 0 ? `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">${results.map(p => getPostCardHTML(p)).join('')}</div>` : `<div class="text-center py-10 text-gray-500 dark:text-slate-400"><p>Tidak ada postingan yang cocok ditemukan.</p></div>`}<div class="mt-12"><h3 class="text-lg font-semibold text-gray-700 dark:text-slate-300 mb-4">Mungkin Anda suka?</h3><div class="flex flex-wrap gap-3">${suggestedCategories.map(c => `<button onclick="navigate('search', '${c.replace(/'/g, "&apos;")}')" class="px-4 py-2 bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 rounded-full hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500 transition-colors">${c}</button>`).join('')}</div></div></main>`; }
-        function getFooterHTML() { return `<footer class="bg-slate-800 dark:bg-black text-slate-400 mt-auto"><div class="max-w-6xl mx-auto py-10 px-4 sm:px-6"><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div><h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">SUPPORT</h3><a href="#" class="block text-lg hover:text-white transition-colors">Saweria</a></div><div><h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">ABOUT</h3><a href="#" class="block text-lg hover:text-white transition-colors">About Us</a></div></div><div class="mt-8 pt-8 border-t border-slate-700 dark:border-slate-600 text-center text-slate-500"><p>&copy; ${new Date().getFullYear()} Sandex. All rights reserved.</p></div></div></footer>`; }
+        
+        function getFooterHTML() { 
+            return `<footer class="bg-slate-800 dark:bg-black text-slate-400 mt-auto">
+                <div class="max-w-6xl mx-auto py-10 px-4 sm:px-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">SUPPORT</h3>
+                            <a href="#" class="block text-lg hover:text-white transition-colors">Saweria</a>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">ABOUT</h3>
+                            <!-- PERUBAHAN: Tautan ini sekarang membuka halaman About Us -->
+                            <a href="#" onclick="navigate('about')" class="block text-lg hover:text-white transition-colors">About Us</a>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-slate-700 dark:border-slate-600 text-center text-slate-500">
+                        <p>&copy; ${new Date().getFullYear()} Sandex. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>`; 
+        }
+
         function render() {
             let mainContent = '';
+            // --- PENAMBAHAN BARU ---
+            // Langkah 2: Daftarkan halaman baru di dalam render()
             switch (appState.currentPage) {
-                case 'detail': mainContent = getDetailPageHTML(); break;
-                case 'search': mainContent = getSearchPageHTML(); break;
-                default: mainContent = getHomePageHTML();
+                case 'detail': 
+                    mainContent = getDetailPageHTML(); 
+                    break;
+                case 'search': 
+                    mainContent = getSearchPageHTML(); 
+                    break;
+                case 'about':
+                    mainContent = getAboutPageHTML();
+                    break;
+                default: 
+                    mainContent = getHomePageHTML();
             }
             appRoot.innerHTML = getHeaderHTML() + mainContent + getFooterHTML();
         }
+
         function setState(newState) {
             Object.assign(appState, newState);
             render();
@@ -138,7 +172,6 @@
         window.navigate = (page, data) => { window.scrollTo(0, 0); const newState = { currentPage: page, isSearchOpen: false, isMenuOpen: false }; if (page === 'detail') newState.selectedPostId = data; else if (page === 'search') newState.searchQuery = data; else { newState.selectedPostId = null; newState.searchQuery = ''; } setState(newState); };
         window.setViewMode = (mode) => setState({ viewMode: mode });
         
-        // PERBAIKAN: Menggunakan 'load' untuk memastikan semua script (termasuk database.js) selesai dimuat.
         window.addEventListener('load', render);
     </script>
     
