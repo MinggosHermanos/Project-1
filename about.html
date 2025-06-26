@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Website Sandex</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Memanggil file CSS eksternal -->
+    <link rel="stylesheet" href="assets/style.css">
 
+    <!-- Memanggil file database -->
+    <script src="database.js"></script>
+</head>
+<body>
+
+    <div id="app-root" class="max-w-6xl mx-auto min-h-screen flex flex-col">
+        <header id="header-container"></header>
+        <main id="main-content" class="flex-grow"></main>
+        <footer id="footer-container"></footer>
+    </div>
+
+    <a href="https://t.me/SandexReal" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-30 h-16 w-16 flex items-center justify-center bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-all transform hover:scale-110" aria-label="Chat di Telegram">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.57c-.28 1.13-1.04 1.4-1.74.88L14.25 16l-4.12 3.9c-.78.72-1.4.34-1.68-.65z"></path></svg>
+    </a>
+    
+    <!-- Memanggil file JavaScript utama -->
+    <script src="assets/main.js"></script>
+
+    <!-- Script khusus untuk halaman ini -->
+    <script>
+        function initAboutPage() {
+            const mainContentContainer = document.getElementById('main-content');
+            mainContentContainer.innerHTML = `
+                <div class="p-4 sm:p-6 lg:p-8">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Tentang Kami</h1>
+                    <div class="mt-6 prose prose-lg dark:prose-invert max-w-none">
+                        <p>Selamat datang di Sandex!</p>
+                        <p>Kami adalah platform yang didedikasikan untuk menyediakan konten terbaik dan paling menarik untuk Anda. Misi kami adalah untuk menghibur, menginspirasi, dan memberikan informasi yang relevan dengan gaya yang modern dan mudah diakses.</p>
+                        <p>Terima kasih telah menjadi bagian dari komunitas kami.</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
