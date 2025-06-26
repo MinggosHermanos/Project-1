@@ -46,7 +46,7 @@ videoLink2: '\#'
 // --- Data untuk Banner Iklan di Halaman Utama ---
 const bannerData = {
 imageUrl: 'https://placehold.co/1200x675/1e293b/ffffff?text=Banner+Iklan+Anda',
-linkUrl: 'https://m.youtube.com/watch?v=mr68r04YhNQ&pp=0gcJCfwAo7VqN5tD' // Ganti '\#' dengan link tujuan iklan Anda
+linkUrl: '\#' // Ganti '\#' dengan link tujuan iklan Anda
 };
 
 // --- Data untuk Kategori yang Disarankan di Halaman Pencarian ---
