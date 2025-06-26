@@ -5,46 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Website Sandex</title>
     
+    <!-- Memuat Font & Tailwind CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Memanggil file CSS eksternal -->
-    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Memanggil file database -->
-    <script src="database.js"></script>
+    <!-- Script untuk dark mode -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    <!-- CSS Kustom -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .dark body {
+             background-color: #020617;
+        }
+    </style>
 </head>
-<body>
+<body class="transition-colors duration-300">
 
     <div id="app-root" class="max-w-6xl mx-auto min-h-screen flex flex-col">
-        <header id="header-container"></header>
-        <main id="main-content" class="flex-grow"></main>
-        <footer id="footer-container"></footer>
+        <!-- Konten akan dirender oleh JavaScript di sini -->
     </div>
 
     <a href="https://t.me/SandexReal" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-30 h-16 w-16 flex items-center justify-center bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-all transform hover:scale-110" aria-label="Chat di Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.57c-.28 1.13-1.04 1.4-1.74.88L14.25 16l-4.12 3.9c-.78.72-1.4.34-1.68-.65z"></path></svg>
     </a>
-    
-    <!-- Memanggil file JavaScript utama -->
-    <script src="assets/main.js"></script>
 
-    <!-- Script khusus untuk halaman ini -->
+    <!-- JavaScript Aplikasi -->
     <script>
-        function initAboutPage() {
-            const mainContentContainer = document.getElementById('main-content');
-            mainContentContainer.innerHTML = `
-                <div class="p-4 sm:p-6 lg:p-8">
-                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Tentang Kami</h1>
-                    <div class="mt-6 prose prose-lg dark:prose-invert max-w-none">
+        const appState = {
+            theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+            isMenuOpen: false,
+            isSearchOpen: false, // Halaman About tidak perlu fungsi pencarian
+        };
+        
+        const appRoot = document.getElementById('app-root');
+
+        function getHeaderHTML() {
+            const { theme, isMenuOpen, isSearchOpen } = appState;
+            // Di halaman ini, kita tidak akan menampilkan bilah pencarian
+            return `<div class="relative"><header class="sticky top-0 z-20 flex items-center justify-between p-3 sm:p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-sm border-b border-gray-200 dark:border-slate-800"><div class="flex items-center space-x-3"><button onclick="toggleMenu()" class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-500 dark:bg-blue-600 text-white shadow-md hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors">${isMenuOpen ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>`}</button><h1 class="text-2xl font-bold text-gray-800 dark:text-slate-200 tracking-tight">Sandex</h1></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="index.html" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a2 2 0 002 2h10a2 2 0 002-2V10M9 20v-6a2 2 0 012-2h2a2 2 0 012 2v6" /></svg></a><button onclick="toggleTheme()" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700">${theme === 'light' ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`}</button></div></header><div class="absolute top-full left-0 right-0 z-10 p-2 transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}"><div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-100 dark:border-slate-700 p-2"><nav class="flex flex-col space-y-1"><a href="index.html" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">Halaman utama</a><a href="about.html" class="px-4 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors">About Us</a></nav></div></div></div>`;
+        }
+
+        function getAboutPageContent() {
+            return `
+                <main class="p-4 sm:p-6 lg:p-8 flex-grow">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white border-b-2 border-blue-500 pb-2 mb-6">Tentang Kami</h1>
+                    <div class="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
                         <p>Selamat datang di Sandex!</p>
                         <p>Kami adalah platform yang didedikasikan untuk menyediakan konten terbaik dan paling menarik untuk Anda. Misi kami adalah untuk menghibur, menginspirasi, dan memberikan informasi yang relevan dengan gaya yang modern dan mudah diakses.</p>
-                        <p>Terima kasih telah menjadi bagian dari komunitas kami.</p>
+                        <p>Dari postingan harian hingga ulasan mendalam, kami berusaha untuk selalu menjadi sumber utama informasi dan hiburan bagi Anda. Tim kami bekerja tanpa lelah untuk memastikan setiap konten yang kami sajikan memiliki kualitas tertinggi.</p>
+                        <p>Terima kasih telah menjadi bagian dari komunitas kami dan mendukung perjalanan kami. Kami selalu terbuka untuk masukan dan saran dari Anda.</p>
                     </div>
-                </div>
-            `;
+                </main>`;
         }
+        
+        function getFooterHTML() { return `<footer class="bg-slate-800 dark:bg-black text-slate-400 mt-auto"><div class="max-w-6xl mx-auto py-10 px-4 sm:px-6"><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div><h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">SUPPORT</h3><a href="#" class="block text-lg hover:text-white transition-colors">Saweria</a></div><div><h3 class="text-sm font-bold tracking-wider uppercase text-slate-300 mb-4">ABOUT</h3><a href="about.html" class="block text-lg hover:text-white transition-colors">About Us</a></div></div><div class="mt-8 pt-8 border-t border-slate-700 dark:border-slate-600 text-center text-slate-500"><p>&copy; ${new Date().getFullYear()} Sandex. All rights reserved.</p></div></div></footer>`; }
+
+        function render() {
+            appRoot.innerHTML = getHeaderHTML() + getAboutPageContent() + getFooterHTML();
+        }
+
+        window.toggleTheme = () => { const isDark = document.documentElement.classList.toggle('dark'); appState.theme = isDark ? 'dark' : 'light'; localStorage.setItem('theme', appState.theme); render(); }
+        window.toggleMenu = () => { appState.isMenuOpen = !appState.isMenuOpen; render(); }
+        
+        document.addEventListener('DOMContentLoaded', render);
     </script>
+    
 </body>
 </html>
