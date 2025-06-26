@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Postingan - Website Sandex</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="database.js"></script>
+</head>
+<body>
+
+    <div id="app-root" class="max-w-6xl mx-auto min-h-screen flex flex-col">
+        <header id="header-container"></header>
+        <main id="main-content" class="flex-grow"></main>
+        <footer id="footer-container"></footer>
+    </div>
+    
+    <a href="https://t.me/SandexReal" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-30 h-16 w-16 flex items-center justify-center bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-all transform hover:scale-110" aria-label="Chat di Telegram">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.57c-.28 1.13-1.04 1.4-1.74.88L14.25 16l-4.12 3.9c-.78.72-1.4.34-1.68-.65z"></path></svg>
+    </a>
+
+    <script src="assets/main.js"></script>
+
+    <script>
+        function initDetailPage() {
+            const mainContentContainer = document.getElementById('main-content');
+            
+            // 1. Baca ID dari URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = parseInt(urlParams.get('id'));
+
+            // 2. Cari data postingan yang cocok dengan ID
+            const post = postsData.find(p => p.id === postId);
+
+            let contentHTML = '';
+
+            // 3. Tampilkan konten jika data ditemukan, atau tampilkan pesan error
+            if (post) {
+                document.title = `${post.title} - Website Sandex`; // Update judul tab browser
+                contentHTML = `
+                    <div class="p-4 sm:p-6">
+                        <header class="flex items-center mb-4">
+                            <a href="index.html" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                            </a>
+                            <h1 class="text-xl font-bold text-gray-800 dark:text-slate-200 ml-2">${post.title}</h1>
+                        </header>
+                        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 p-4 max-w-md mx-auto">
+                            <img src="${post.detailImage}" alt="${post.title}" class="w-full h-auto object-cover rounded-lg mb-6" />
+                            <h2 class="text-lg font-semibold text-center text-gray-700 dark:text-slate-300 mb-4">Tautan Video</h2>
+                            <ul class="space-y-3">
+                                <li><a href="${post.videoLink1 || '#'}" target="_blank" class="block w-full text-center px-4 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">Tonton Video 1</a></li>
+                                <li><a href="${post.videoLink2 || '#'}" target="_blank" class="block w-full text-center px-4 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">Tonton Video 2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                contentHTML = `
+                    <div class="p-4 sm:p-6 text-center">
+                        <h2 class="text-2xl font-bold text-red-500">Error 404</h2>
+                        <p class="text-slate-600 dark:text-slate-400 mt-2">Postingan yang Anda cari tidak ditemukan.</p>
+                        <a href="index.html" class="mt-6 inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Kembali ke Beranda</a>
+                    </div>
+                `;
+            }
+
+            mainContentContainer.innerHTML = contentHTML;
+        }
+
+        // Jalankan fungsi saat halaman ini dimuat
+        initDetailPage();
+    </script>
+</body>
+</html>
